@@ -46,15 +46,15 @@ const LoginModal = () => {
             ...data,
             redirect: false,
          })
-         .then((callback) => {
+         .then((clb) => {
             setIsLoading(false);
-            if (callback?.ok) {
+            if (clb?.ok) {
                 toast.success("Logged In");
                 router.refresh();
                 loginModal.onClose();
             }
-            if (callback?.error) {
-                toast.error(callback.error);
+            if (clb?.error) {
+                toast.error(clb.error);
             }
          })
     }
@@ -110,7 +110,7 @@ const LoginModal = () => {
                         Already have an account?
                     </div>
                     <div 
-                    onClick={registerModal.onClose}
+                    onClick={loginModal.onOpen}
                     className="text-neutral-800 cursor-pointer hover:underline">
                         Log in
                     </div>

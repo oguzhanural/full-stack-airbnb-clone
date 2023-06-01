@@ -18,10 +18,10 @@ export const authOptions: AuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         }),
         CredentialsProvider({
-            name: "credentials",
+            name: "Credentials",
             credentials: {
-                email: { label: 'email', type: 'text'},
-                password: { label: 'password', type: 'password'},
+                email: { label: 'Email', type: 'text'},
+                password: { label: 'Password', type: 'password'},
             },
         async authorize(credentials) {
             if (!credentials?.email || !credentials?.password) {
@@ -34,7 +34,7 @@ export const authOptions: AuthOptions = {
                 }
             });
             if (!user || !user?.hashedPassword) {
-                throw new Error("Invalid credentials");
+                throw new Error("Invalid credentials or user not found!");
             }
 
             const isCorrectPassword = await bcrypt.compare(
@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
                 user.hashedPassword
             );
             if (!isCorrectPassword) {
-                throw new Error("Invalid credentials"); // db hashPassword and user entered password doesn't match.
+                throw new Error("Invalid credentials. Wrong mail or password."); // db hashPassword and user entered password doesn't match.
             }
             return user; // return the user to our client
         }
