@@ -15,11 +15,13 @@ import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 
 const RegisterModal = () => {
     // first thing first...
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -40,7 +42,10 @@ const RegisterModal = () => {
          setIsLoading(true);
          axios.post('/api/register', data)
          .then( () => {
+            toast.success('Registered!');
             registerModal.onClose();
+            loginModal.onOpen();
+            
          })
          .catch((err) => {
             toast.error('Something went wrong.');
