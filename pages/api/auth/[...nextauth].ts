@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
+
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -51,7 +52,7 @@ export const authOptions: AuthOptions = {
     pages: {
         signIn: '/',
     },
-    debug: process.env.NODE_ENV == 'development',
+    debug: process.env.NODE_ENV === 'development',
     session: {
         strategy: "jwt"
     },
