@@ -2,10 +2,14 @@
 
 import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
+
 import { useMemo, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
+
 
 enum STEPS {
     CATEGORY = 0,
@@ -18,7 +22,41 @@ enum STEPS {
 
 const RentModal = () => {
     const rentModal = useRentModal();
-    const [step, setStep] = useState(STEPS.CATEGORY);
+    const [step, setStep] = useState(STEPS.CATEGORY); // STEPS.CATEGORY = 0
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: {
+            errors,
+        },
+        reset
+    } = useForm<FieldValues>({
+        defaultValues: {
+            category: '',
+            location: null, // it's gonna be object so right now just null
+            guestCount: 1,
+            roomCount: 1,
+            bathroomCount: 1,
+            imageSrc: '',
+            price: 1,
+            title: '',
+            description: '',
+        }
+    });
+    // first thing first category will create.
+    const category = watch('category');
+
+    const setCustomValue = (id: string, value: any) => {
+        setValue(id, value, {
+            shouldValidate: true, // most important one.
+            shouldDirty: true,
+            shouldTouch: true,
+        });
+
+    }
 
     const onBack = () => {
         setStep((value:number) => value - 1);
@@ -53,8 +91,8 @@ const RentModal = () => {
                 {categories.map((item) => (
                     <div key={item.label} className="col-span-1">
                        <CategoryInput
-                        onClick = {() => {}}
-                        selected = {false}
+                        onClick = {(category) => setCustomValue('category', category)}
+                        selected = {category === item.label}
                         label = {item.label}
                         icon = {item.icon}
                        />
@@ -64,13 +102,21 @@ const RentModal = () => {
             </div>
         </div>
     )
+
+    if (step === STEPS.LOCATION) {
+        bodyContent = (
+            <div className="">
+                Location Step!
+            </div>
+        )
+    }
     
 
   return (
 
     <Modal 
     onClose={rentModal.onClose}
-    onSubmit={rentModal.onClose}
+    onSubmit={onNext} // we will change this later
     isOpen = {rentModal.isOpen}
     actionLabel={actionLabel}
     secondaryActionLabel={secondaryActionLabel}
