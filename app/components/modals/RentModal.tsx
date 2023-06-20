@@ -10,7 +10,8 @@ import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
-import Map from "../Map";
+import dynamic from "next/dynamic";
+// import Map from "../Map"; // bunun yerine dinamik bir şekilde import edeceğiz. 
 
 
 enum STEPS {
@@ -51,6 +52,13 @@ const RentModal = () => {
     // first thing first category will create.
     const category = watch('category');
     const location = watch('location');
+
+    //lokasyon değiştirildikçe harita da ona göre değişecek
+    // o yüzden useMemo dependincies i lokasyona bağlı.
+
+    const Map = useMemo(() => dynamic(() => import('../Map'), {
+        ssr: false
+    }), [location]);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -118,7 +126,9 @@ const RentModal = () => {
                 onChange={ (value) => setCustomValue('location', value)}
                 />
                 {/* MAP COMPONENT. HARİTA EKLENECEK! */}
-                <Map /> 
+                <Map
+                  center={location?.latlng}
+                 /> 
             </div>
         )
     }
