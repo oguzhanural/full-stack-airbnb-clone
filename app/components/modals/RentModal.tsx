@@ -11,6 +11,7 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
+import Counter from "../inputs/Counter";
 // import Map from "../Map"; // bunun yerine dinamik bir şekilde import edeceğiz. 
 
 
@@ -52,6 +53,7 @@ const RentModal = () => {
     // first thing first category will create.
     const category = watch('category');
     const location = watch('location');
+    const guestCount = watch('guestCount');
 
     //lokasyon değiştirildikçe harita da ona göre değişecek
     // o yüzden useMemo dependincies i lokasyona bağlı.
@@ -129,6 +131,24 @@ const RentModal = () => {
                 <Map
                   center={location?.latlng}
                  /> 
+            </div>
+        )
+    }
+
+    if(step === STEPS.INFO) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                 title="Share some basics about your place"
+                 subtitle="What amenities do you have?"
+                />
+                <Counter
+                  title="Guests"
+                  subtitle="How many guests do you allow?"
+                  value={guestCount}
+                  onChange={(value) => setCustomValue('guestCount', value)}
+                 /> 
+
             </div>
         )
     }
