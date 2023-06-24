@@ -12,6 +12,7 @@ import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
+import ImageUpload from "../inputs/ImageUpload";
 // import Map from "../Map"; // bunun yerine dinamik bir şekilde import edeceğiz. 
 
 
@@ -166,7 +167,18 @@ const RentModal = () => {
                  /> 
                  <hr />
 
+            </div>
+        )
+    }
 
+    if (step === STEPS.IMAGES) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                 title="Add a photo of your place"
+                 subtitle="Shows guests what your place look like!"
+                />
+                <ImageUpload />
             </div>
         )
     }
