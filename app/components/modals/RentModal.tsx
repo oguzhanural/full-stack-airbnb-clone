@@ -57,6 +57,7 @@ const RentModal = () => {
     const guestCount = watch('guestCount');
     const roomCount = watch('roomCount');
     const bathroomCount = watch('bathroomCount');
+    const imageSrc = watch('imageSrc');
 
     //lokasyon değiştirildikçe harita da ona göre değişecek
     // o yüzden useMemo dependincies i lokasyona bağlı.
@@ -178,7 +179,10 @@ const RentModal = () => {
                  title="Add a photo of your place"
                  subtitle="Shows guests what your place look like!"
                 />
-                <ImageUpload />
+                <ImageUpload
+                    value={imageSrc}
+                    onChange={(value) => setCustomValue('imageSrc', value)}
+                />
             </div>
         )
     }
