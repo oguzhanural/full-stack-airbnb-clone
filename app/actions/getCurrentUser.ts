@@ -22,7 +22,7 @@ export default async function getCurrentUser() {
             }
          });
          if (!currentUser) {
-            return null;
+            return null; // kullanıcı yoksa bile sayfanın gösterilmesi gerekiyor.
          }
 
          console.log(currentUser);
