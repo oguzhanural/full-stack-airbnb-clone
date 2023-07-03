@@ -25,7 +25,7 @@ export default async function getCurrentUser() {
             return null; // kullanıcı yoksa bile sayfanın gösterilmesi gerekiyor.
          }
 
-         console.log(currentUser);
+        //  console.log(currentUser);
          return {
             ...currentUser,
             createdAt: currentUser.createdAt.toISOString(),
