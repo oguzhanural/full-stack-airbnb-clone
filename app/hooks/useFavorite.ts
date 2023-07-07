@@ -16,8 +16,12 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     const loginModal = useLoginModal();
 
     const hasFavorited = useMemo(() => {
+        // console.log(currentUser?.favoriteIds);
+        
         const list = currentUser?.favoriteIds || []; // daha önceden favorilere eklemediği için boş array döner.
+
         return list.includes(listingId);    // listingId değerini içermediği için - çünkü boş - false dönüyor.
+
     }, [currentUser, listingId]);
 
 
@@ -28,6 +32,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
             // login modal will open if tries to add to favorites without logging in.
             return loginModal.onOpen();
         }
+        // console.log(currentUser);
 
         try {
             let request;
@@ -56,3 +61,5 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 }
 
 export default useFavorite;
+
+

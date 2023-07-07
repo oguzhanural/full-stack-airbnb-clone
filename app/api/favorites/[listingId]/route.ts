@@ -28,7 +28,7 @@ export async function POST(request: Request, { params }: { params:IParams } ) {
             id: currentUser.id
         },
         data: {
-            favoriteIds: favoriteIds
+            favoriteIds
         }
     });
 
@@ -49,7 +49,7 @@ export async function DELETE(request:Request, { params }: { params: IParams }) {
         throw new Error('Invalid ID');
     }
 
-    let favoriteIds = [...(currentUser.favoriteIds || []) ];
+    let favoriteIds = [...(currentUser.favoriteIds || [])];
 
     favoriteIds = favoriteIds.filter((id) => id !== listingId); // array'in içinde ki her bir id değerini id değişkenine atıp listing id ile karşılaştırıyor ve eşit olmayanları return ediyor.
     // the selected id out of array
@@ -58,7 +58,7 @@ export async function DELETE(request:Request, { params }: { params: IParams }) {
             id: currentUser.id
         },
         data: {
-            favoriteIds: favoriteIds
+            favoriteIds
         }
     });
 
