@@ -20,6 +20,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({
     // const toggleFavorite = () => {};
     
     // replaced it with useFavorite hook
+    // console.log(listingId);
     const { hasFavorited, toggleFavorite } = useFavorite({listingId, currentUser});
     // console.log(hasFavorited);
 

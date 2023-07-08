@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
+
 interface IParams {
     listingId?: string;
 }
@@ -15,6 +16,7 @@ export async function POST(request: Request, { params }: { params:IParams } ) {
     }
     
     const { listingId } = params;
+    // console.log("route listing id: " + listingId);
     if (!listingId || typeof listingId !== 'string') {
         throw new Error('Invalid ID');
     }
@@ -28,10 +30,10 @@ export async function POST(request: Request, { params }: { params:IParams } ) {
             id: currentUser.id
         },
         data: {
-            favoriteIds
+            favoriteIds: favoriteIds
         }
     });
-
+    
     return NextResponse.json(user);
 
 }
@@ -58,7 +60,7 @@ export async function DELETE(request:Request, { params }: { params: IParams }) {
             id: currentUser.id
         },
         data: {
-            favoriteIds
+            favoriteIds: favoriteIds
         }
     });
 

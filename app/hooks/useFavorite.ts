@@ -11,15 +11,17 @@ interface IUseFavorite {
     currentUser?: SafeUser | null;
 }
 
+
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     const router = useRouter();
     const loginModal = useLoginModal();
-
+    
+    
     const hasFavorited = useMemo(() => {
         // console.log(currentUser?.favoriteIds);
-        
-        const list = currentUser?.favoriteIds || []; // daha önceden favorilere eklemediği için boş array döner.
-
+        // console.log(listingId);
+        const list = currentUser?.favoriteIds || [];// daha önceden favorilere eklemediği için boş array döner.
+        // list.push(listingId);
         return list.includes(listingId);    // listingId değerini içermediği için - çünkü boş - false dönüyor.
 
     }, [currentUser, listingId]);
