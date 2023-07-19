@@ -25,7 +25,7 @@ const ListingReservation:React.FC<ListingReservationProps> = ({
 
   return (
     <div className="">
-        bla bla
+
     </div>
   )
 }
