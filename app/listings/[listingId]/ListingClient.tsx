@@ -56,7 +56,7 @@ const ListingClient:React.FC<ListingClientProps> = ({
     const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
     
-    // rezervasyın oluşturduktan sonra trips kısmında görüntülenecek.
+    // rezervasyon oluşturduktan sonra trips kısmında görüntülenecek.
     //create our reservations
     const onCreateReservation = useCallback(() => {
         if (!currentUser) {
