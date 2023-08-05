@@ -33,7 +33,7 @@ const ReservationsClient:React.FC<ReservationsClientProps> = ({
             router.refresh();
         })
         .catch(()=>{
-            toast.error('Sometthing went wrong!');
+            toast.error('Something went wrong!');
         })
         .finally(()=>{
             setDeletingId('');
