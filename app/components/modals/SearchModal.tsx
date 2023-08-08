@@ -116,6 +116,7 @@ const SearchModal = () => {
             <Map center={location?.latlng} />
         </div>
     )
+    
 
 
   return (
