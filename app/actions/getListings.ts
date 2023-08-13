@@ -70,16 +70,14 @@ export default async function getListings(params: IListingsParams) {
                 }
             }
         }
-
-        
         // fetch listings
         const listings = await prisma.listing.findMany({
-            where: query,
+            where: query, // burada sorgunun filtrelenme durumuna göre gerekli değişiklikleri query de yapıldıktan sonra "buradan" diye belirtiyoruz.
             orderBy: {
                 createdAt: 'desc'
             }
         });
-        
+
         const safeListings = listings.map((listing) => ({
             ...listing,
             createdAt: listing.createdAt.toISOString(),
